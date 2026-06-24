@@ -1,0 +1,12 @@
+{
+  "name": "album",
+  "version": "1.0.0",
+  "description": "3D album mini program",
+  "main": "miniprogram/app.js",
+  "scripts": {},
+  "dependencies": {
+    "threejs-miniprogram": "^0.0.8"
+  },
+  "author": "",
+  "license": "ISC"
+}
