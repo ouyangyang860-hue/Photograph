@@ -1,2 +1,57 @@
-<!--pages/manage/index.wxml-->
-<text>pages/manage/index.wxml</text>
+<view class="page">
+  <view class="top-bar">
+    <view class="nav-btn" bindtap="goBack">
+      <text class="nav-icon">←</text>
+    </view>
+    <text class="top-title">相册管理</text>
+    <view class="nav-btn" bindtap="chooseImage">
+      <text class="nav-icon">📷</text>
+    </view>
+  </view>
+
+  <view class="filter-tabs">
+    <view class="tab {{filterType === 'all' ? 'tab-active' : ''}}" bindtap="setFilter" data-type="all">
+      全部 ({{allCount}})
+    </view>
+    <view class="tab {{filterType === 'featured' ? 'tab-active' : ''}}" bindtap="setFilter" data-type="featured">
+      ⭐ 展示 ({{featuredCount}})
+    </view>
+    <view class="tab {{filterType === 'normal' ? 'tab-active' : ''}}" bindtap="setFilter" data-type="normal">
+      普通 ({{allCount - featuredCount}})
+    </view>
+  </view>
+
+  <view class="photo-grid">
+    <view class="photo-item" wx:for="{{filteredPhotos}}" wx:key="_id" bindtap="toggleSelect" data-id="{{item._id}}" data-index="{{index}}">
+      <image class="photo-thumb" src="{{item.tempUrl}}" mode="aspectFill"></image>
+      <view class="photo-featured" wx:if="{{item.isFeatured}}">⭐</view>
+      <view class="photo-check" wx:if="{{item.selected}}">✓</view>
+    </view>
+    <view class="photo-item photo-add" bindtap="chooseImage">
+      <text class="add-icon">+</text>
+      <text class="add-text">上传</text>
+    </view>
+  </view>
+
+  <view class="upload-progress" wx:if="{{uploading}}">
+    <view class="progress-bar">
+      <view class="progress-fill" style="width: {{uploadProgress}}%"></view>
+    </view>
+    <text class="progress-text">上传中 {{uploadProgress}}%</text>
+  </view>
+
+  <view class="bottom-bar" wx:if="{{selectedCount > 0}}">
+    <view class="bar-info">已选 {{selectedCount}} 张</view>
+    <view class="bar-actions">
+      <view class="bar-btn" bindtap="batchSetFeatured">设为展示</view>
+      <view class="bar-btn" bindtap="batchUnsetFeatured">取消展示</view>
+      <view class="bar-btn bar-btn-danger" bindtap="batchDelete">删除</view>
+    </view>
+  </view>
+
+  <view class="empty-tip" wx:if="{{filteredPhotos.length === 0 && !uploading}}">
+    <text class="empty-icon">📷</text>
+    <text class="empty-text">暂无照片</text>
+    <view class="empty-btn" bindtap="chooseImage">上传照片</view>
+  </view>
+</view>

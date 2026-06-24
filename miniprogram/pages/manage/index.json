@@ -1,3 +1,5 @@
 {
+  "navigationBarTitleText": "相册管理",
+  "navigationStyle": "custom",
   "usingComponents": {}
 }

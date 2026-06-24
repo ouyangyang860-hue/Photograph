@@ -1,66 +1,89 @@
-// pages/detail/index.js
 Page({
-
-  /**
-   * 页面的初始数据
-   */
   data: {
-
+    currentPhoto: {},
+    currentIndex: 0,
+    totalCount: 0,
+    photoAnim: {}
   },
 
-  /**
-   * 生命周期函数--监听页面加载
-   */
+  photoList: [],
+
   onLoad(options) {
-
+    const index = parseInt(options.index) || 0
+    this.loadPhotoList(index)
   },
 
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady() {
-
+  loadPhotoList(currentIndex) {
+    const db = wx.cloud.database()
+    db.collection('photos').orderBy('createTime', 'desc').get().then(res => {
+      this.photoList = res.data
+      this.setData({ totalCount: res.data.length })
+      this.showPhoto(currentIndex)
+    })
   },
 
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow() {
+  showPhoto(index) {
+    if (index < 0 || index >= this.photoList.length) return
 
+    const photo = this.photoList[index]
+    const dateStr = photo.createTime ? this.formatDate(photo.createTime) : ''
+
+    this.setData({ currentIndex: index })
+
+    if (photo.fileID) {
+      wx.cloud.getTempFileURL({
+        fileList: [photo.fileID],
+        success: res => {
+          if (res.fileList && res.fileList[0] && res.fileList[0].tempFileURL) {
+            this.setData({
+              currentPhoto: {
+                ...photo,
+                tempUrl: res.fileList[0].tempFileURL,
+                dateStr
+              }
+            })
+            this.playPhotoAnim()
+          }
+        }
+      })
+    }
   },
 
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide() {
-
+  playPhotoAnim() {
+    const anim = wx.createAnimation({ duration: 400, timingFunction: 'ease-out' })
+    anim.opacity(1).scale(1).step()
+    this.setData({ photoAnim: anim.export() })
   },
 
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload() {
-
+  prevPhoto() {
+    if (this.data.currentIndex > 0) {
+      this.showPhoto(this.data.currentIndex - 1)
+    }
   },
 
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh() {
-
+  nextPhoto() {
+    if (this.data.currentIndex < this.photoList.length - 1) {
+      this.showPhoto(this.data.currentIndex + 1)
+    }
   },
 
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom() {
-
+  closeDetail() {
+    wx.navigateBack()
   },
 
-  /**
-   * 用户点击右上角分享
-   */
+  formatDate(date) {
+    if (!date) return ''
+    const d = new Date(date)
+    const y = d.getFullYear()
+    const m = String(d.getMonth() + 1).padStart(2, '0')
+    const day = String(d.getDate()).padStart(2, '0')
+    return `${y}-${m}-${day}`
+  },
+
   onShareAppMessage() {
-
+    return {
+      title: '来看看我的记忆星球 ✨',
+      path: '/pages/index/index'
+    }
   }
 })

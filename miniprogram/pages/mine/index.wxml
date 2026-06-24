@@ -1,2 +1,80 @@
-<!--pages/mine/index.wxml-->
-<text>pages/mine/index.wxml</text>
+<view class="page">
+  <view class="header">
+    <view class="avatar-area">
+      <image class="avatar" src="{{userInfo.avatarUrl || '/images/icons/avatar.png'}}" mode="aspectFill"></image>
+      <view class="avatar-glow"></view>
+    </view>
+    <text class="nickname">{{userInfo.nickName || '记忆星球用户'}}</text>
+    <text class="join-date" wx:if="{{userInfo.createTime}}">加入于 {{joinDate}}</text>
+  </view>
+
+  <view class="stats-row">
+    <view class="stat-item">
+      <text class="stat-num">{{photoCount}}</text>
+      <text class="stat-label">总照片</text>
+    </view>
+    <view class="stat-divider"></view>
+    <view class="stat-item">
+      <text class="stat-num">{{featuredCount}}</text>
+      <text class="stat-label">主屏展示</text>
+    </view>
+    <view class="stat-divider"></view>
+    <view class="stat-item">
+      <text class="stat-num">{{storageSize}}</text>
+      <text class="stat-label">占用空间</text>
+    </view>
+  </view>
+
+  <view class="section">
+    <text class="section-title">布局切换</text>
+    <view class="layout-options">
+      <view class="layout-item {{layout === 'sphere' ? 'layout-active' : ''}}" bindtap="setLayout" data-layout="sphere">
+        <text class="layout-icon">🌐</text>
+        <text class="layout-name">球体</text>
+      </view>
+      <view class="layout-item {{layout === 'carousel' ? 'layout-active' : ''}}" bindtap="setLayout" data-layout="carousel">
+        <text class="layout-icon">🎠</text>
+        <text class="layout-name">圆环</text>
+      </view>
+      <view class="layout-item {{layout === 'spiral' ? 'layout-active' : ''}}" bindtap="setLayout" data-layout="spiral">
+        <text class="layout-icon">🌀</text>
+        <text class="layout-name">螺旋</text>
+      </view>
+    </view>
+  </view>
+
+  <view class="section">
+    <text class="section-title">主题切换</text>
+    <view class="theme-options">
+      <view class="theme-item {{theme === 'dark' ? 'theme-active' : ''}}" bindtap="setTheme" data-theme="dark">
+        <view class="theme-color" style="background: linear-gradient(135deg, #0a0e27, #1a1a4e)"></view>
+        <text class="theme-name">深空蓝</text>
+      </view>
+      <view class="theme-item {{theme === 'gold' ? 'theme-active' : ''}}" bindtap="setTheme" data-theme="gold">
+        <view class="theme-color" style="background: linear-gradient(135deg, #2a1a0a, #4a3520)"></view>
+        <text class="theme-name">暖阳金</text>
+      </view>
+      <view class="theme-item {{theme === 'pink' ? 'theme-active' : ''}}" bindtap="setTheme" data-theme="pink">
+        <view class="theme-color" style="background: linear-gradient(135deg, #2a0a1a, #4a2035)"></view>
+        <text class="theme-name">樱花粉</text>
+      </view>
+    </view>
+  </view>
+
+  <view class="section">
+    <view class="menu-item" bindtap="shareApp">
+      <text class="menu-icon">🔗</text>
+      <text class="menu-text">分享小程序</text>
+      <text class="menu-arrow">›</text>
+    </view>
+    <view class="menu-item" bindtap="goManage">
+      <text class="menu-icon">📷</text>
+      <text class="menu-text">相册管理</text>
+      <text class="menu-arrow">›</text>
+    </view>
+  </view>
+
+  <view class="footer">
+    <text class="version">记忆星球 v1.0.0</text>
+  </view>
+</view>

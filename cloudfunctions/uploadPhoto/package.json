@@ -1,0 +1,12 @@
+{
+  "name": "uploadPhoto",
+  "version": "1.0.0",
+  "description": "照片上传处理云函数",
+  "main": "index.js",
+  "scripts": {},
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "wx-server-sdk": "~2.4.0"
+  }
+}

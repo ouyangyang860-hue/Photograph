@@ -1,1 +1,185 @@
-/* pages/album/index.wxss */
+.page {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  background: #0a0e27;
+}
+
+.album-canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+}
+
+.top-bar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 10;
+}
+
+.top-gradient {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 200rpx;
+  background: linear-gradient(180deg, rgba(10, 14, 39, 0.9) 0%, transparent 100%);
+}
+
+.top-content {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 80rpx 40rpx 30rpx;
+}
+
+.top-title {
+  font-size: 36rpx;
+  font-weight: 600;
+  letter-spacing: 4rpx;
+}
+
+.nav-icon {
+  font-size: 32rpx;
+  color: #ffffff;
+}
+
+.side-controls {
+  position: absolute;
+  right: 24rpx;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  gap: 24rpx;
+}
+
+.side-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 88rpx;
+  height: 88rpx;
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(10px);
+  border: 1rpx solid rgba(255, 255, 255, 0.1);
+  border-radius: 20rpx;
+}
+
+.side-icon {
+  font-size: 32rpx;
+  margin-bottom: 4rpx;
+}
+
+.side-label {
+  font-size: 18rpx;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.bottom-bar {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 10;
+}
+
+.bottom-gradient {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 200rpx;
+  background: linear-gradient(0deg, rgba(10, 14, 39, 0.9) 0%, transparent 100%);
+}
+
+.bottom-content {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 30rpx 40rpx 60rpx;
+}
+
+.photo-total {
+  font-size: 26rpx;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.photo-index {
+  font-size: 26rpx;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.empty-tip {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 5;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.empty-icon {
+  font-size: 100rpx;
+  margin-bottom: 30rpx;
+}
+
+.empty-text {
+  font-size: 30rpx;
+  color: rgba(255, 255, 255, 0.5);
+  margin-bottom: 40rpx;
+}
+
+.empty-btn {
+  padding: 20rpx 60rpx;
+  background: linear-gradient(135deg, #4a7dff, #6c5ce7);
+  border-radius: 40rpx;
+  font-size: 28rpx;
+  color: #ffffff;
+}
+
+.loading-mask {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 20;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: rgba(10, 14, 39, 0.8);
+}
+
+.loading-spinner {
+  width: 60rpx;
+  height: 60rpx;
+  border: 4rpx solid rgba(255, 255, 255, 0.2);
+  border-top-color: #4a7dff;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+.loading-text {
+  margin-top: 20rpx;
+  font-size: 26rpx;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}

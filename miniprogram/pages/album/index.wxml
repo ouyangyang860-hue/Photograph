@@ -1,2 +1,63 @@
-<!--pages/album/index.wxml-->
-<text>pages/album/index.wxml</text>
+<view class="page">
+  <canvas
+    type="webgl"
+    id="albumCanvas"
+    class="album-canvas"
+    bindtouchstart="onTouchStart"
+    bindtouchmove="onTouchMove"
+    bindtouchend="onTouchEnd"
+    bindlongpress="onLongPress"
+  ></canvas>
+
+  <view class="top-bar">
+    <view class="top-gradient"></view>
+    <view class="top-content">
+      <view class="nav-btn" bindtap="goBack">
+        <text class="nav-icon">←</text>
+      </view>
+      <text class="top-title text-glow">记忆星球</text>
+      <view class="nav-btn" bindtap="goManage">
+        <text class="nav-icon">⚙</text>
+      </view>
+    </view>
+  </view>
+
+  <view class="side-controls">
+    <view class="side-btn" bindtap="switchLayout">
+      <text class="side-icon">🔄</text>
+      <text class="side-label">布局</text>
+    </view>
+    <view class="side-btn" bindtap="resetView">
+      <text class="side-icon">⟲</text>
+      <text class="side-label">重置</text>
+    </view>
+    <view class="side-btn" bindtap="randomBrowse">
+      <text class="side-icon">🎲</text>
+      <text class="side-label">随机</text>
+    </view>
+    <view class="side-btn" bindtap="goMine">
+      <text class="side-icon">👤</text>
+      <text class="side-label">我的</text>
+    </view>
+  </view>
+
+  <view class="bottom-bar">
+    <view class="bottom-gradient"></view>
+    <view class="bottom-content">
+      <text class="photo-total" wx:if="{{photoCount > 0}}">共 {{photoCount}} 张</text>
+      <text class="photo-total" wx:else>暂无照片</text>
+      <text class="photo-index" wx:if="{{currentPhotoIndex >= 0}}">第 {{currentPhotoIndex + 1}}/{{photoCount}} 张</text>
+    </view>
+  </view>
+
+  <view class="empty-tip" wx:if="{{photoCount === 0 && !loading}}">
+    <text class="empty-icon">🌌</text>
+    <text class="empty-text">还没有照片</text>
+    <view class="empty-btn" bindtap="goManage">去上传照片</view>
+  </view>
+
+  <view class="loading-mask" wx:if="{{loading}}">
+    <view class="loading-spinner"></view>
+    <text class="loading-text">加载中...</text>
+  </view>
+</view>

@@ -1,2 +1,32 @@
-<!--pages/detail/index.wxml-->
-<text>pages/detail/index.wxml</text>
+<view class="page" bindtap="closeDetail">
+  <view class="blur-bg" style="background-image: url({{currentPhoto.tempUrl}})"></view>
+
+  <view class="photo-container" catchtap="">
+    <image
+      class="photo-main"
+      src="{{currentPhoto.tempUrl}}"
+      mode="aspectFit"
+      animation="{{photoAnim}}"
+      bindtap=""
+    ></image>
+  </view>
+
+  <view class="photo-info" catchtap="">
+    <view class="info-row">
+      <text class="info-date">{{currentPhoto.dateStr}}</text>
+      <text class="info-featured" wx:if="{{currentPhoto.isFeatured}}">⭐ 主屏展示</text>
+    </view>
+    <text class="info-index">{{currentIndex + 1}} / {{totalCount}}</text>
+  </view>
+
+  <view class="nav-arrow left" catchtap="prevPhoto" wx:if="{{currentIndex > 0}}">
+    <text class="arrow-icon">‹</text>
+  </view>
+  <view class="nav-arrow right" catchtap="nextPhoto" wx:if="{{currentIndex < totalCount - 1}}">
+    <text class="arrow-icon">›</text>
+  </view>
+
+  <view class="close-btn" catchtap="closeDetail">
+    <text class="close-icon">✕</text>
+  </view>
+</view>
